@@ -7,3 +7,16 @@
 /TTA.Api/Migrations/*.cs
 /TTA.Infrastructure/bin/*
 /TTA.Infrastructure/obj/*
+/TTA.Api/ClientApp/node_modules/*
+/TTA.Api/ClientApp/dist/*
+/TTA.Api/ClientApp/tmp/*
+/TTA.Api/ClientApp/out-tsc/*
+
+# IDEs and editors
+/TTA.Api/ClientApp/.idea
+/TTA.Api/ClientApp/*.project
+/TTA.Api/ClientApp/*.classpath
+.c9/
+/TTA.Api/ClientApp/*.launch
+/TTA.Api/ClientApp/*.settings/
+/TTA.Api/ClientApp/*.sublime-workspace

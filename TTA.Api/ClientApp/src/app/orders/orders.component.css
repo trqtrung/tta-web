@@ -1,0 +1,25 @@
+.card {
+    min-width: 90%;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  a {
+    cursor: pointer;
+  }
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  
+  .mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
+  }

@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>{{data}}</h1>
+<div mat-dialog-content>
+  <form class="example-form" (ngSubmit)="onSubmit()">
+    <input type="hidden" name="id" [(ngModel)]="product.id">
+    <mat-form-field>
+      <input matInput placeholder="Name" type="text" required [(ngModel)]="product.name" name="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="English Name" type="text" required [(ngModel)]="product.englishName" name="english_name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="SKU" type="text" required [(ngModel)]="product.sku" name="sku">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="product.type" [ngModelOptions]="{standalone: true}" name="type" placeholder="Type">
+        <mat-option *ngFor="let t of types" [value]="t.id">
+          {{ t.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="product.brand" [ngModelOptions]="{standalone: true}" name="brandid" placeholder="Brand">
+        <mat-option *ngFor="let b of brands" [value]="b.name">
+          {{ b.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Buying Price" type="number" required [(ngModel)]="product.buyingPrice" name="buying-price">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Price" type="number" required [(ngModel)]="product.price" name="price">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Weight (gram)" type="number" [(ngModel)]="product.weight" name="weight"> 
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Height(cm)" type="number" [(ngModel)]="product.height" name="height">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Width(cm)" type="number" [(ngModel)]="product.width" name="width">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Length(cm)" type="number" [(ngModel)]="product.length" name="length">
+      </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" required [(ngModel)]="product.description" [ngModelOptions]="{standalone: true}" name="description"></textarea>
+    </mat-form-field>     
+    
+        <mat-checkbox [ngModelOptions]="{standalone: true}" [(ngModel)]="product.enabled">Active</mat-checkbox>
+    <br>
+    
+    <button mat-raised-button type="submit" color="primary">Save</button>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button class="close" (click)="onNoClick()" color="warn">Cancel</button>
+</div>

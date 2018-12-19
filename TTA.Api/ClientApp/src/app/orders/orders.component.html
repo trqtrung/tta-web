@@ -1,0 +1,124 @@
+<div>
+  <br>
+    <div class="container">
+        <div class="container">
+            <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+                <div class="blocks" >
+                    <button button="submit" mat-raised-button color="primary" (click)="openDialog()">
+                        <mat-icon>add</mat-icon> Add Order
+                    </button>
+                </div>
+          </div>
+      </div>
+      <br>
+      <div class="container">
+            
+          <div fxLayout="row" fxLayoutAlign="center center" class="content">
+          <!-- <mat-card class="card" > -->
+              <!-- <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+              <h3>Orders List</h3>
+              </mat-card-title>
+              <mat-card-content> -->
+                  <div class="example-container mat-elevation-z8">
+                      
+                    <div class="example-header">
+                            <div>
+                                <mat-form-field>
+                                            <input matInput [matDatepicker]="pickerFrom" placeholder="From" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [min]="minDateFrom" [max]="maxDateFrom">
+                                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerFrom></mat-datepicker>
+                                 </mat-form-field>
+                                 <mat-form-field>
+                                        <input matInput [matDatepicker]="pickerTo" placeholder="To" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)" [min]="minDateTo" [max]="maxDateTo">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerTo></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        <mat-form-field>
+                        <input matInput #filter placeholder="Filter Orders">
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                        <mat-spinner></mat-spinner>
+                    </div> -->
+                      <table mat-table #table [dataSource]="dataSource" matSort>
+                          <!--- Note that these columns can be defined in any order.
+                                  The actual rendered columns are set as a property on the row definition" -->
+
+                          <ng-container cdkColumnDef="order_no">
+                              <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Order No. </th>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.orderNo}}</a> </td>
+                              <td mat-footer-cell *matFooterCellDef></td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="id">
+                              <th mat-header-cell *cdkHeaderCellDef mat-sort-header> ID </th>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"> {{row.clientOrderId}} </td>
+                              <td mat-footer-cell *matFooterCellDef></td>
+                          </ng-container>
+ 
+                          <ng-container cdkColumnDef="client">
+                              <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Client </th>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.client}}</a> </td>
+                              <td mat-footer-cell *matFooterCellDef></td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="stage">
+                              <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Stage </th>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.stage}}</a> </td>
+                              <td mat-footer-cell *matFooterCellDef></td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="customer_name">
+                            <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Customer </th>
+                            <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.customerName}}</a> </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+                          <ng-container cdkColumnDef="payment_method">
+                            <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Payment Method </th>
+                            <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.paymentMethod}}</a> </td>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+                        <ng-container cdkColumnDef="receive_payment">
+                            <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Paid </th>
+                            <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.receivePayment | date : 'dd/MM/yyyy HH:mm'}}</a> </td>>
+                            <td mat-footer-cell *matFooterCellDef></td>
+                        </ng-container>
+
+                          <ng-container cdkColumnDef="order_date">
+                              <th mat-header-cell *cdkHeaderCellDef mat-sort-header> Order Date </th>>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.orderDate | date : 'dd/MM/yyyy HH:mm'}}</a> </td>
+                              <td mat-footer-cell *matFooterCellDef>TOTAL</td>
+                          </ng-container>
+
+                          <ng-container cdkColumnDef="total">
+                              <th mat-header-cell *cdkHeaderCellDef> Total </th>>
+                              <td mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.total | currency : 'VND' }}</a> </td>>
+                              <td mat-footer-cell *matFooterCellDef> {{getTotal() | currency : 'VND'}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></tr>>
+                          <tr mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="selectRow(row)"  class="example-row"></tr>>
+                            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+                      </table>
+
+                      <div class="example-no-results"
+                      [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+                      No products found matching filter.
+                      </div>
+
+                      <mat-paginator #paginator 
+                                  [length]="dataSource?.filteredData.length"
+                                  [pageIndex]="0"
+                                  [pageSize]="25"
+                                  [pageSizeOptions]="[5, 10, 25, 100]">
+                      </mat-paginator>     
+                  </div>
+              <!-- </mat-card-content> -->
+          <!-- </mat-card> -->
+      </div>
+  </div>
+</div>
+</div>

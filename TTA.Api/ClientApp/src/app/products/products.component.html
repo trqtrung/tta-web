@@ -1,0 +1,91 @@
+
+<div>
+    <br>
+          <div class="container">
+                <div class="container">                       
+                <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+                        <div class="blocks" >
+                            <button button="submit" mat-raised-button color="primary" (click)="openDialog()">
+                                <mat-icon>add</mat-icon> Add Product
+                              </button>
+                        </div>
+                </div>
+            </div>
+            <br>
+            <div class="container">
+                <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <mat-card class="card" >
+                    <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+                    <h5>Product List</h5>
+                    </mat-card-title>
+                    <mat-card-content>
+                        <div class="example-container mat-elevation-z8">
+                            <div class="example-header">
+                                <mat-form-field>
+                                <input matInput #filter placeholder="Filter products">
+                                </mat-form-field>
+                            </div>
+                            <mat-table #table [dataSource]="dataSource" matSort>
+                                <!--- Note that these columns can be defined in any order.
+                                        The actual rendered columns are set as a property on the row definition" -->
+                            
+                                <!-- ID Column -->
+                                <ng-container cdkColumnDef="id">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"> {{row.id}} </mat-cell>
+                                </ng-container>
+                            
+                                <!-- Name Column -->    
+                                <ng-container cdkColumnDef="name">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.name}}</a> </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="sku">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> SKU </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.sku}}</a> </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="brand">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Brand </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.brand}}</a> </mat-cell>
+                                </ng-container>
+
+                                <!-- Desc Column -->    
+                                <ng-container cdkColumnDef="description">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Desc </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.description}}</a> </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="buyingPrice">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Buy Price </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.buyingPrice | currency : 'VND'}}</a> </mat-cell>
+                                </ng-container>
+
+                                <ng-container cdkColumnDef="price">
+                                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Price </mat-header-cell>
+                                    <mat-cell *cdkCellDef="let row" class="example-cell"><a> {{row.price | currency : 'VND'}}</a> </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></mat-header-row>
+                                <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="selectProduct(row)"  class="example-row"></mat-row>
+                            </mat-table>
+
+                            <div class="example-no-results"
+                            [style.display]="dataSource?.renderedData.length == 0 ? '' : 'none'">
+                            No products found matching filter.
+                            </div>
+
+                            <mat-paginator #paginator 
+                                        [length]="dataSource?.filteredData.length"
+                                        [pageIndex]="0"
+                                        [pageSize]="25"
+                                        [pageSizeOptions]="[5, 10, 25, 100]">
+                            </mat-paginator>     
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+
+*.dll
+/TTA.Api/bin/*
+/TTA/obj/Release/*
+/TTA/obj/*
+/TTA.Api/obj/*
+/TTA.Api/Migrations/*.cs
+/TTA.Infrastructure/bin/*
+/TTA.Infrastructure/obj/*
